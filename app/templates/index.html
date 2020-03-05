@@ -1,8 +1,44 @@
 {% extends "base.html" %}
 
-
 {% block app_content %}
+<div class="row">
+  <!-- Blog Entries Column -->
+  <div class="col-md-8">
+      {% for event in events %}
+      <div class="col-sm-6 col-md-3">
+          <a href="{{ url_for('events.event', id=event.id) }}" class="thumbnail">
+            <img src="{{ url_for('static', filename='event_pics/' + event.image) }}" alt="" class="cus-img">
+          </a>
+      </div>
+      {% endfor %}
+      
+  </div> 
 
-<h2>INDEX page </h2>
+  <!-- Sidebar Widgets Column -->
+  <div class="col-md-4">
+    <!-- Search Widget -->
+    <div class="panel panel-default">
+      <div class="panel-heading"><b>Side Bar Add Something Here</b></div>
+      <div class="panel-body">
+        <ul class="list-group">
+          <li class="list-group-item">
+            <a href="{{ url_for('main.index') }}">All</a>
+          </li>
+          {% for X in Y %}
+            <li class="list-group-item">
+              <a href="{{ url_for('main.index', cat=category) }}">{{ X.title() }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <div class="text-center row col-md-8">
+    <!--{{ pagination.info }}-->
+    {{ pagination.links }} 
+  </div>
+</div>
 
 {% endblock %}

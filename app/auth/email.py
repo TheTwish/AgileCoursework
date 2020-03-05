@@ -19,7 +19,7 @@ def send_password_reset_email(user):
     ) 
 
 def send_verify_email(user):
-    token = user.get_token()
+    token = user.get_token_user()
     send_email(
         f'{APP_NAME} : Verify Your email',
         sender=current_app.config['ADMINS'][0],

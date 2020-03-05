@@ -130,9 +130,9 @@ def reset_password(token):
         return redirect(url_for('auth.login'))
     return render_template('auth/reset_password.html', form=form)
 
-@auth.route('/confirm_email/<token>')
+@auth.route('/confirm_email/<token>', methods=['GET', 'POST'])
 def confirm_email(token):
-    user = User.verify_token(token)
+    user = User.verify_token_user(token)
     if not user:
         return redirect(url_for('main.index'))
     """try:
@@ -141,5 +141,6 @@ def confirm_email(token):
         return '<h1>Your link has expired!<h1>'"""
 
     user.set_validated(True)
+    db.session.commit()
     flash('You are now authenticated, congratulations!', 'success')
     return redirect(url_for('auth.login'))

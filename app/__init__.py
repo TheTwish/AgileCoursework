@@ -2,6 +2,7 @@ import logging
 from flask import Flask
 from config import Config
 from flask_mail import Mail
+from flask_moment import Moment
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
@@ -11,6 +12,7 @@ from logging.handlers import SMTPHandler, RotatingFileHandler
 mail = Mail()
 db = SQLAlchemy()
 migrate = Migrate()
+moment = Moment()
 login = LoginManager()
 bootstrap = Bootstrap()
 login.login_view = 'auth.login'
@@ -28,16 +30,18 @@ def create_app(config_class=Config):
     bootstrap.init_app(app)
     migrate.init_app(app, db)
     mail.init_app(app)
-
+    moment.init_app(app)
     # import the blueprint
     from app.auth.routes import auth
     from app.main.routes import main
     from app.errors.handlers import errors
+    from app.events.routes import events
 
     # register the blueprint
     app.register_blueprint(auth)
     app.register_blueprint(main)
     app.register_blueprint(errors)
+    app.register_blueprint(events)
     
     if not app.debug and not app.testing:
         if app.config['MAIL_SERVER']:

@@ -1,0 +1,7 @@
+{% for event in events %}
+<div class="col-sm-6 col-md-3">
+    <a href="{{ url_for('events.event', id=event.id) }}" class="thumbnail" data-toggle="tooltip" data-placement="top" title="Select image for more details">
+        <img src="{{ url_for('static', filename='event_pics/' + event.image) }}" alt="" class="img-responsive">
+    </a>
+</div>
+{% endfor %}
