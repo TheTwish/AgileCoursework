@@ -11,7 +11,7 @@ class AddEventForm(FlaskForm):
     summary = TextAreaField('Summary', validators=[DataRequired(), Length(min=100, max=5000)])
     image = FileField('Add image', validators=[FileAllowed(['jpg', 'png'])])
     price = DecimalField('Price', default=0.00)
-    date = DateTimeField()
+    #date = DateField("Pick A Date",format='%d-%m-%Y' )
     #category_id = SelectField('Select category', coerce=int)
     submit = SubmitField('Add event')
 

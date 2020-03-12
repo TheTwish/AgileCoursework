@@ -38,6 +38,11 @@ def login():
         flash('User is not validated, please check your email', 'danger')
     return render_template('auth/login.html', title='Login', form=form)"""
 
+
+
+
+
+#DUE TO ISSUES WITH UNIVERSITY PERMISSION, YOU ARE AUTOMATICALLY VALIDATED WITHOUT EMAIL, HOWEVER IT DOES WORK VIA EMAIL AS WELL
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:

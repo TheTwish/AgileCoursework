@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from app.events.forms import AddEventForm, EditEventForm, ReviewForm, CategoryForm, EditCategoryForm
 from app.models import Event, Review
-#from app.funcs import save_picture
+from app.funcs import save_picture
 from app import db
 from sqlalchemy.sql import func, or_
 from flask_login import current_user, login_user, logout_user, login_required
@@ -16,7 +16,6 @@ def all_events():
 @login_required
 def new_event():
     form = AddEventForm()
-    #form.category_id.choices = [(c.id, c.name.title()) for c in Category.query.all()]
     if form.validate_on_submit():
         image_file = 'default.jpg'
         if form.image.data:
@@ -28,9 +27,8 @@ def new_event():
             summary=form.summary.data,
             image=image_file,
             location=form.location.data,
-            date = form.date.data,
+            #date = form.date.data,
             price=form.price.data,
-            #category_id=form.category_id.data
         )
         db.session.add(event)
         db.session.flush()
